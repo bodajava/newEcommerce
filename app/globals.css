@@ -1,26 +1,378 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100dvw;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+  background-color: black;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.floating-nav {
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+/* Nav Hover Button */
+.nav-hover-btn {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-hover-btn:hover {
+  color: #60a5fa;
+}
+
+/* Indicator Line for Audio */
+.indicator-line {
+  width: 3px;
+  height: 20px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: bottom;
+}
+
+.indicator-line.active {
+  animation: audioWave 1s ease-in-out infinite;
+}
+
+@keyframes audioWave {
+  0%, 100% {
+    transform: scaleY(0.3);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+/*  Button Components */
+
+.box-button {
+  cursor: pointer;
+  border: 4px solid black;
+  background-color: gray;
+  padding-bottom: 10px;
+  transition: 0.1s ease-in-out;
+  user-select: none;
+}
+
+.button {
+  background-color: #dddddd;
+  border: 4px solid #fff;
+  padding: 3px 8px;
+}
+
+.button span {
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}
+
+.box-button:active {
+  padding: 0;
+  margin-bottom: 10px;
+  transform: translateY(10px);
+}
+
+
+
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: #513cec;
+  padding: 10px 20px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #a29bfe;
+}
+
+.btn:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
+}
+
+
+.dot-spinner {
+  --uib-size: 2rem;
+  --uib-speed: .9s;
+  --uib-color: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .dot-spinner {
+    --uib-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dot-spinner {
+    --uib-size: 2.8rem;
+  }
+}
+
+.dot-spinner__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+.dot-spinner__dot::before {
+  content: '';
+  height: 20%;
+  width: 20%;
+  border-radius: 50%;
+  background-color: var(--uib-color);
+  transform: scale(0);
+  opacity: 0.5;
+  animation: pulse0112 calc(var(--uib-speed) * 1.111) ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(18, 31, 53, 0.3);
+}
+
+.dot-spinner__dot:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.dot-spinner__dot:nth-child(2)::before {
+  animation-delay: calc(var(--uib-speed) * -0.875);
+}
+
+.dot-spinner__dot:nth-child(3) {
+  transform: rotate(90deg);
+}
+
+.dot-spinner__dot:nth-child(3)::before {
+  animation-delay: calc(var(--uib-speed) * -0.75);
+}
+
+.dot-spinner__dot:nth-child(4) {
+  transform: rotate(135deg);
+}
+
+.dot-spinner__dot:nth-child(4)::before {
+  animation-delay: calc(var(--uib-speed) * -0.625);
+}
+
+.dot-spinner__dot:nth-child(5) {
+  transform: rotate(180deg);
+}
+
+.dot-spinner__dot:nth-child(5)::before {
+  animation-delay: calc(var(--uib-speed) * -0.5);
+}
+
+.dot-spinner__dot:nth-child(6) {
+  transform: rotate(225deg);
+}
+
+.dot-spinner__dot:nth-child(6)::before {
+  animation-delay: calc(var(--uib-speed) * -0.375);
+}
+
+.dot-spinner__dot:nth-child(7) {
+  transform: rotate(270deg);
+}
+
+.dot-spinner__dot:nth-child(7)::before {
+  animation-delay: calc(var(--uib-speed) * -0.25);
+}
+
+.dot-spinner__dot:nth-child(8) {
+  transform: rotate(315deg);
+}
+
+.dot-spinner__dot:nth-child(8)::before {
+  animation-delay: calc(var(--uib-speed) * -0.125);
+}
+
+@keyframes pulse0112 {
+  0%,
+  100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Cart Fade In Animation */
+.cart-item-fade-in {
+  animation: cartFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cart-summary-fade-in {
+  animation: cartFadeIn 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes cartFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown and Modal Fixes */
+/* Ensure dropdowns and modals are properly layered */
+[role="dialog"],
+[aria-modal="true"] {
+  isolation: isolate;
+  contain: layout style paint;
+}
+
+/* Prevent body scroll when dropdown/modal is open */
+body:has([role="dialog"][aria-hidden="false"]),
+body:has([aria-modal="true"][aria-hidden="false"]) {
+  overflow: hidden;
+}
+
+/* Fix for fixed positioned dropdowns */
+.fixed {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Ensure dropdowns don't get clipped */
+.dropdown-container,
+[data-dropdown],
+[role="menu"] {
+  overflow: visible !important;
+  contain: none;
+}
+
+/* Smooth transitions for dropdowns */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+
+/* From Uiverse.io by alexmaracinaru */ 
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: rgba(239, 68, 68, 0.2);
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.cta span {
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ef4444;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #ef4444;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.95);
+}
+
+.cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
