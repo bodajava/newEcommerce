@@ -176,10 +176,19 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Mobile Menu Button */}
-              <button onClick={toggleMenu} className="md:hidden text-white hover:text-sky-400 transition-colors p-2" aria-label="Toggle menu">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              {/* Mobile Right Side (Cart + Menu Toggle) */}
+              <div className="flex items-center gap-2 md:hidden">
+                <Link href="/Cart" prefetch={true} className="flex items-center gap-1 cursor-pointer text-sky-400 hover:text-white transition-colors relative p-2" onClick={() => setIsMenuOpen(false)}>
+                  <ShoppingBag size={20} />
+                  {numberOfCartItem > 0 && (
+                    <div className="absolute top-0 right-0 w-4 h-4 bg-white rounded-full flex items-center justify-center text-black text-[10px]">{numberOfCartItem}</div>
+                  )}
+                </Link>
+
+                <button onClick={toggleMenu} className="text-white hover:text-sky-400 transition-colors p-2" aria-label="Toggle menu">
+                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </div>
             </div>
           </div>
         </header>
