@@ -26,7 +26,9 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next()
     } else {
         if (isProtectedPage) {
-            return NextResponse.redirect(new URL('/Login', request.url))
+            // Redirect to Login with callbackUrl if possible
+            const loginUrl = new URL('/Login', request.url)
+            return NextResponse.redirect(loginUrl)
         }
         return NextResponse.next()
     }
