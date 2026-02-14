@@ -2,14 +2,22 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
 export async function middleware(request: NextRequest) {
+    const secret = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET
     const token = await getToken({
         req: request,
-        secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET
+        secret
     })
 
     const { pathname } = request.nextUrl
-    const isAuthPage = pathname === '/Login' || pathname === '/Regester' || pathname === '/register'
-    const isProtectedPage = pathname.startsWith('/Cart')
+    const lowerPath = pathname.toLowerCase()
+
+    // Define page types
+    const isAuthPage = lowerPath === '/login' || lowerPath === '/register'
+    const isProtectedPage =
+        lowerPath.startsWith('/cart') ||
+        lowerPath.startsWith('/checkout') ||
+        lowerPath.startsWith('/allorders') ||
+        lowerPath.startsWith('/love')
 
     if (token) {
         if (isAuthPage) {
@@ -25,7 +33,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/Cart', '/Login', '/Regester', '/register'],
+    matcher: [
+        '/Cart/:path*',
+        '/Checkout/:path*',
+        '/allorders/:path*',
+        '/Love/:path*',
+        '/Login',
+        '/register'
+    ],
 }
 
 

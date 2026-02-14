@@ -16,11 +16,11 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       <div
         ref={ref}
         className={cn(
-          "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-lg border p-6 pr-8 shadow-lg transition-all",
+          "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-xl border p-4 md:p-6 md:pr-8 shadow-2xl transition-all backdrop-blur-md",
           {
-            "border-gray-800 bg-gray-900 text-white": variant === "default",
-            "border-green-500/50 bg-green-500/10 text-green-400": variant === "success",
-            "border-red-500/50 bg-red-500/10 text-red-400": variant === "destructive",
+            "border-gray-800/50 bg-gray-900/90 text-white": variant === "default",
+            "border-green-500/30 bg-green-500/10 text-green-400": variant === "success",
+            "border-red-500/30 bg-red-500/10 text-red-400": variant === "destructive",
           }
         )}
         {...props}
